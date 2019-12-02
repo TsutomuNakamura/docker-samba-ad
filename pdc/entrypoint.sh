@@ -17,13 +17,11 @@ LDAP_DEFAULT_CAMPANY_NAME="Nanigashi Corp"
 
 
 main() {
-    cd "$WORK_DIR"
-    source .env
+    #cd "$WORK_DIR"
+    #source .env
 
 #    ${WORK_DIR}/docker/common/set_hosts.sh
 #    ${WORK_DIR}/docker/common/set_resolver.sh
-
-    exit
 
     local fqdn="${LDAP_HOST^^}.${LDAP_DOMAIN_OF_MAIL_ADDRESS}"
     local host_ip=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
@@ -70,12 +68,12 @@ ${TAB}password hash userPassword schemes = CryptSHA256 CryptSHA512
         echo "" >> /etc/supervisor/conf.d/supervisord.conf
         echo "[program:samba]" >> /etc/supervisor/conf.d/supervisord.conf
         echo "command=/usr/sbin/samba -i" >> /etc/supervisor/conf.d/supervisord.conf
-        echo "[program:health_server]" >> /etc/supervisor/conf.d/supervisord.conf
-        echo "command=node /opt/app/docker/ldap/health_server.js" >> /etc/supervisor/conf.d/supervisord.conf
+        #echo "[program:health_server]" >> /etc/supervisor/conf.d/supervisord.conf
+        #echo "command=node /opt/app/docker/ldap/health_server.js" >> /etc/supervisor/conf.d/supervisord.conf
 
         /usr/sbin/samba -D
         sync
-        add_dns_records || return 1
+        #add_dns_records || return 1
         create_groups
         create_users
         kill $(cat /var/run/samba/samba.pid)
