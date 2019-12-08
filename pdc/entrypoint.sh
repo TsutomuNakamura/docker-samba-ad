@@ -28,6 +28,9 @@ main() {
 
     if [[ ! -f /etc/samba/external/smb.conf ]]; then
 
+        # Update the bundler latest
+        gem install bundler
+
         [[ -f /etc/krb5.conf ]] && mv /etc/krb5.conf /etc/krb5.conf.org
         [[ -f /etc/samba/smb.conf ]] && mv /etc/samba/smb.conf /etc/samba/smb.conf.org
 
